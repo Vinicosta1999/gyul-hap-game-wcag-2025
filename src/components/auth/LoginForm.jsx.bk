@@ -1,0 +1,81 @@
+```jsx
+import React, { useState } from 'react';
+import AuthService from '../../services/AuthService'; // Ajuste o caminho se necessário
+
+const LoginForm = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setMessage('');
+    setLoading(true);
+
+    try {
+      // Em uma aplicação real, AuthService.login faria uma chamada de API
+      // e retornaria dados do usuário e token upon success.
+      const data = await AuthService.login(username, password);
+      // Exemplo: Salvar token no localStorage e redirecionar ou atualizar estado global
+      // localStorage.setItem('userToken', data.token);
+      setMessage('Login successful! (Placeholder)'); // Mensagem de sucesso
+      // Aqui você normalmente redirecionaria o usuário ou atualizaria o estado da aplicação
+      console.log('Login successful, token:', data.token, 'user:', data.user);
+    } catch (error) {
+      const resMessage =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      setMessage(resMessage);
+    }
+    setLoading(false);
+  };
+
+  return (
+    <form onSubmit={handleLogin}>
+      <div>
+        <label htmlFor="username">Username or Email:</label>
+        <input 
+          type="text" 
+          id="username" 
+          name="username" 
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required 
+        />
+      </div>
+      <div>
+        <label htmlFor="password">Password:</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required 
+        />
+      </div>
+      <div>
+        <button type="submit" disabled={loading}>
+          {loading && (
+            <span className="spinner-border spinner-border-sm"></span>
+          )}
+          <span>Login</span>
+        </button>
+      </div>
+      {message && (
+        <div className="form-group">
+          <div className="alert alert-danger" role="alert">
+            {message}
+          </div>
+        </div>
+      )}
+    </form>
+  );
+};
+
+export default LoginForm;
+```

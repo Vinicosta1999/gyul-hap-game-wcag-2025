@@ -1,0 +1,103 @@
+```javascript
+// src/services/AuthService.js
+
+// Assume que a API_URL para o backend de autenticação já está definida em algum lugar
+// Ex: const API_URL = "http://localhost:8080/api/auth/";
+// Para este exemplo, usaremos a API do backend já desenvolvida no projeto.
+const API_URL = "/api/"; // Ajustado para o proxy do Vite ou configuração similar
+
+const register = async (username, email, password) => {
+  const response = await fetch(API_URL + "auth/register", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username, email, password }),
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "Could not register user.");
+  }
+  return data;
+};
+
+const login = async (email, password) => { // Alterado para email e password conforme backend
+  const response = await fetch(API_URL + "auth/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password }), // Alterado para email
+  });
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.message || "Could not login.");
+  }
+  if (data.token) {
+    localStorage.setItem("userToken", data.token);
+    // O backend retorna o usuário em data.user, vamos armazená-lo também
+    // Poderíamos apenas armazenar o token e decodificá-lo no frontend para obter dados do usuário,
+    // mas como o backend já envia, vamos usar.
+    localStorage.setItem("currentUser", JSON.stringify(data.user)); 
+  }
+  return data;
+};
+
+const logout = () => {
+  localStorage.removeItem("userTconst logout = () => {
+  localStorage.removeItem("userToken");
+  localStorage.removeItem("currentUser"); // Garantir que o usuário também seja removido
+  // Aqui você pode querer chamar um endpoint de logout no backend se ele existir
+  // para invalidar o token do lado do servidor, se aplicável.
+  // Ex: return fetch(API_URL + "auth/logout", { method: "POST", headers: authHeader() });
+  return Promise.resolve();
+};rrentUser = () => {
+  const userStr = localStorage.getItem("currentUser");
+  if (userStr) {
+    try {
+      return JSON.parse(userStr);
+    } catch (e) {
+      console.error("Could not parse user from localStorage", e);
+      localStorage.removeItem("currentUser"); // Limpa se estiver corrompido
+      localStorage.removeItem("userToken");
+      return null;
+    }
+  }
+  // Se não houver usuário no localStorage, mas houver token, poderia tentar decodificar
+  // Mas para simplificar, vamos assumir que se não há "currentUser", o usuário não está logado.
+  return null;
+};
+
+// Função helper para obter o cabeçalho de autorização
+const authHeader = () => {
+  const token = localStorage.getItem("userToken");
+  if (token) {
+    return { "Authorization": "Bearer " + token };
+  }
+  return {};
+};
+
+// Exemplo de como usar authHeader em um serviço que acessa um endpoint protegido:
+// const getProtectedData = async () => {
+//   const response = await fetch(API_URL + "some_protected_route", {
+//     method: "GET",
+//     headers: { ...authHeader(), "Content-Type": "application/json" },
+//   });
+//   if (!response.ok) {
+//     const data = await response.json().catch(() => ({ message: response.statusText }));
+//     throw new Error(data.message || "Could not fetch protected data.");
+//   }
+//   return response.json();
+// };
+
+const AuthService = {
+  register,
+  login,
+  logout,
+  getCurrentUser,
+  authHeader, // Exporta o helper para ser usado em outros serviços
+  // getProtectedData, // Exemplo
+};
+
+export default AuthService;
+```

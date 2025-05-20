@@ -1,0 +1,430 @@
+/* /home/ubuntu/gyul_hap_final_project/src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%; /* Light theme background - white */
+    --foreground: 222.2 84% 4.9%; /* Light theme foreground - dark gray */
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+ 
+    --primary: 222.2 47.4% 11.2%; /* shadcn/ui primary - dark blue */
+    --primary-foreground: 210 40% 98%; /* shadcn/ui primary foreground - light gray */
+ 
+    --secondary: 210 40% 96.1%; /* shadcn/ui secondary - light gray */
+    --secondary-foreground: 222.2 47.4% 11.2%; /* shadcn/ui secondary foreground - dark blue */
+ 
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%; /* shadcn/ui muted foreground - gray */
+ 
+    --accent: 210 40% 96.1%; /* shadcn/ui accent - light gray */
+    --accent-foreground: 222.2 47.4% 11.2%; /* shadcn/ui accent foreground - dark blue */
+ 
+    --destructive: 0 84.2% 60.2%; /* shadcn/ui destructive - red */
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%; /* shadcn/ui border - light gray */
+    --input: 214.3 31.8% 91.4%; /* shadcn/ui input border - light gray */
+    --ring: 222.2 84% 4.9%; /* shadcn/ui ring - dark blue */
+ 
+    --radius: 0.5rem;
+
+    /* Custom colors for Gyul Hap light theme */
+    --gh-bg-main: 200 20% 96%; /* Light Grayish Blue */
+    --gh-bg-panel: 0 0% 100%;   /* White */
+    --gh-text-primary: 200 15% 25%; /* Dark Blue-Gray */
+    --gh-text-secondary: 200 10% 45%; /* Medium Blue-Gray */
+    --gh-accent-gold: 45 100% 51%; /* Gold */
+    --gh-accent-dark-gold: 40 100% 40%; /* Dark Gold */
+    --gh-border-color: 200 10% 85%; /* Light Gray Border */
+    
+    --gh-button-primary-bg: hsl(var(--primary));
+    --gh-button-primary-text: hsl(var(--primary-foreground));
+    --gh-button-primary-hover-bg: hsl(222.2 47.4% 20.2%); /* Darker primary */
+
+    --gh-button-secondary-bg: hsl(var(--secondary));
+    --gh-button-secondary-text: hsl(var(--secondary-foreground));
+    --gh-button-secondary-hover-bg: hsl(210 40% 90.1%); /* Darker secondary */
+    
+    --gh-button-accent-bg: hsl(var(--gh-accent-dark-gold));
+    --gh-button-accent-text: 0 0% 100%; /* White */
+    --gh-button-accent-hover-bg: hsl(var(--gh-accent-gold));
+
+    --gh-message-correct-bg: 145 63% 90%; /* Light Green */
+    --gh-message-correct-border: 145 58% 45%; /* Green */
+    --gh-message-correct-text: 145 60% 25%; /* Dark Green */
+    
+    --gh-message-incorrect-bg: 0 72% 92%; /* Light Red */
+    --gh-message-incorrect-border: 0 72% 51%; /* Red */
+    --gh-message-incorrect-text: 0 70% 30%; /* Dark Red */
+
+    --gh-message-info-bg: 200 100% 90%; /* Light Blue */
+    --gh-message-info-border: 200 70% 50%; /* Blue */
+    --gh-message-info-text: 200 80% 30%; /* Dark Blue */
+  }
+ 
+  .dark {
+    --background: 222.2 84% 4.9%; 
+    --foreground: 210 40% 98%; 
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+ 
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+ 
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+ 
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+ 
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+ 
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+ 
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+ 
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+
+    /* Custom colors for Gyul Hap dark theme */
+    --gh-bg-main: 220 18% 12%; 
+    --gh-bg-panel: 220 15% 18%;   
+    --gh-text-primary: 0 0% 94%; 
+    --gh-text-secondary: 220 10% 75%; 
+    --gh-border-color: 220 10% 30%;
+
+    --gh-message-correct-bg: 145 60% 18%; 
+    --gh-message-correct-border: 145 58% 55%; 
+    --gh-message-correct-text: 145 63% 80%; 
+    
+    --gh-message-incorrect-bg: 0 70% 20%; 
+    --gh-message-incorrect-border: 0 72% 61%; 
+    --gh-message-incorrect-text: 0 72% 88%; 
+
+    --gh-message-info-bg: 200 70% 20%; 
+    --gh-message-info-border: 200 70% 60%; 
+    --gh-message-info-text: 200 80% 85%; 
+  }
+}
+
+@layer base {
+  * {
+    @apply box-border;
+  }
+  body {
+    @apply bg-[hsl(var(--background))] text-[hsl(var(--foreground))];
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+      "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    line-height: 1.5;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold text-[hsl(var(--foreground))];
+  }
+
+  button, input, select, textarea {
+    @apply font-sans;
+  }
+}
+
+/* Utility classes for focus visibility, can be applied with @apply */
+.focus-visible-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-[hsl(var(--ring))] focus:ring-offset-2 focus:ring-offset-[hsl(var(--background))];
+}
+
+/* General button styling using Tailwind components for consistency */
+.btn {
+  @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors disabled:opacity-50 disabled:pointer-events-none focus-visible-ring;
+  @apply px-4 py-2;
+}
+
+.btn-primary {
+  @apply bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] hover:bg-[hsl(var(--primary))]/90;
+}
+
+.btn-secondary {
+  @apply bg-[hsl(var(--secondary))] text-[hsl(var(--secondary-foreground))] hover:bg-[hsl(var(--secondary))]/80;
+}
+
+.btn-accent {
+  @apply bg-[hsl(var(--gh-button-accent-bg))] text-[hsl(var(--gh-button-accent-text))] hover:bg-[hsl(var(--gh-button-accent-hover-bg))];
+}
+
+.btn-destructive {
+  @apply bg-[hsl(var(--destructive))] text-[hsl(var(--destructive-foreground))] hover:bg-[hsl(var(--destructive))]/90;
+}
+
+.btn-outline {
+  @apply border border-[hsl(var(--input))] hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))];
+}
+
+.btn-ghost {
+  @apply hover:bg-[hsl(var(--accent))] hover:text-[hsl(var(--accent-foreground))];
+}
+
+.btn-link {
+  @apply text-[hsl(var(--primary))] underline-offset-4 hover:underline;
+}
+
+/* Input styling */
+.input-field {
+  @apply flex h-10 w-full rounded-md border border-[hsl(var(--input))] bg-transparent px-3 py-2 text-sm ring-offset-[hsl(var(--background))] file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-[hsl(var(--muted-foreground))] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[hsl(var(--ring))] focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+/* Card component base style (can be extended by Tailwind classes) */
+.card-base {
+  @apply rounded-lg border bg-[hsl(var(--card))] text-[hsl(var(--card-foreground))] shadow-sm;
+}
+
+/* Game container styles - can be refactored to use Tailwind more */
+.game-container {
+  @apply max-w-3xl mx-auto my-5 p-5 bg-[hsl(var(--gh-bg-panel))] text-[hsl(var(--gh-text-primary))] rounded-lg shadow-xl;
+}
+
+.settings-view {
+    @apply bg-[hsl(var(--gh-bg-main))];
+}
+
+.game-header {
+  @apply flex justify-between items-center mb-5;
+}
+
+.game-title {
+  font-family: "Impact", Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  @apply text-[hsl(var(--gh-accent-gold))] text-center text-4xl sm:text-5xl;
+  text-shadow: 2px 2px 4px #000000;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.mute-button, .settings-button-ingame {
+  @apply btn btn-secondary px-3 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm;
+}
+
+.scoreboard-area {
+  @apply text-center mb-4 p-3 bg-[hsl(var(--gh-bg-main))] rounded-md text-[hsl(var(--gh-text-secondary))] text-lg;
+}
+
+.scoreboard-area p {
+  @apply my-1;
+}
+
+.timer-display {
+  @apply text-[hsl(var(--gh-accent-gold))] font-bold;
+}
+
+.board-grid {
+  @apply grid grid-cols-3 gap-2 sm:gap-4 mb-5 p-2 sm:p-4 bg-[hsl(var(--gh-bg-main))] rounded-md;
+}
+
+.card-slot-number {
+    @apply text-center text-xs text-[hsl(var(--gh-text-secondary))] mb-0.5;
+}
+
+.player-panels-container {
+    @apply flex flex-col sm:flex-row justify-around mb-5 gap-4;
+}
+
+.player-panel {
+    @apply bg-[hsl(var(--gh-bg-panel))] border border-[hsl(var(--gh-border-color))] p-4 rounded-md text-center shadow-md transition-all duration-300 ease-in-out flex-1;
+}
+
+.player-panel.current-turn {
+    @apply border-[hsl(var(--gh-accent-gold))] ring-2 ring-[hsl(var(--gh-accent-gold))];
+}
+
+.player-panel h3 {
+    @apply mt-0 text-[hsl(var(--gh-accent-gold))] text-lg font-semibold;
+}
+
+.player-panel p {
+    @apply text-2xl my-1 text-[hsl(var(--gh-text-primary))];
+}
+
+.game-message-area {
+    @apply p-3 mb-5 rounded-md text-center min-h-[50px] text-base border-l-4 transition-all duration-300 ease-in-out;
+}
+
+.game-message-area.message-correct {
+    @apply bg-[hsl(var(--gh-message-correct-bg))] border-[hsl(var(--gh-message-correct-border))] text-[hsl(var(--gh-message-correct-text))];
+    animation: pulse-green 0.8s ease-out;
+}
+
+.game-message-area.message-incorrect {
+    @apply bg-[hsl(var(--gh-message-incorrect-bg))] border-[hsl(var(--gh-message-incorrect-border))] text-[hsl(var(--gh-message-incorrect-text))];
+    animation: shake-horizontal 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+.game-message-area.message-info {
+    @apply bg-[hsl(var(--gh-message-info-bg))] border-[hsl(var(--gh-message-info-border))] text-[hsl(var(--gh-message-info-text))];
+}
+
+.action-buttons {
+    @apply flex justify-center gap-3 sm:gap-5;
+}
+
+.game-button {
+    @apply btn btn-accent shadow-md;
+}
+
+.game-button.secondary-button {
+    @apply btn btn-secondary border border-[hsl(var(--gh-border-color))];
+}
+
+/* Settings View Specifics */
+.settings-title {
+    @apply text-[hsl(var(--gh-accent-gold))] text-center mb-5 text-2xl sm:text-3xl;
+}
+
+.setting-item {
+    @apply mb-4 flex flex-col sm:flex-row items-start sm:items-center justify-between;
+}
+
+.setting-item label {
+    @apply mr-0 sm:mr-3 mb-1 sm:mb-0 text-[hsl(var(--gh-text-secondary))];
+}
+
+.settings-select {
+    @apply input-field w-full sm:min-w-[180px];
+}
+
+.language-selector button {
+    @apply btn btn-outline text-xs px-2 py-1; /* Corrected: removed btn-sm, added Tailwind size utilities */
+    margin-left: 5px;
+}
+.language-selector button.active {
+    @apply btn-primary;
+}
+
+.start-game-button {
+    @apply btn btn-accent block w-full sm:w-1/2 mx-auto my-5 py-3 text-lg;
+}
+
+/* Name input for leaderboard */
+.name-input-form {
+    @apply flex flex-col sm:flex-row justify-center items-center mb-4 gap-2;
+}
+
+.name-input-field {
+    @apply input-field;
+}
+
+/* Card reveal animation */
+.card-reveal {
+  animation: flip-in-ver-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes flip-in-ver-right {
+  0% {
+    transform: rotateY(-80deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-green {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 hsla(var(--gh-message-correct-border), 0.7);
+  }
+  70% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 10px hsla(var(--gh-message-correct-border), 0);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 hsla(var(--gh-message-correct-border), 0);
+  }
+}
+
+@keyframes shake-horizontal {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* Additional Responsive adjustments for smaller screens */
+@media (max-width: 640px) { /* Tailwind sm breakpoint */
+  .game-title {
+    font-size: 2rem; /* Slightly smaller for very small screens */
+  }
+  .board-grid {
+    gap: 0.5rem; /* Tighter gap for cards */
+    padding: 0.5rem;
+  }
+  .action-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .game-button {
+    width: 100%;
+  }
+  .start-game-button {
+    width: 100%;
+    font-size: 1.1rem;
+  }
+  .player-panel h3 {
+    font-size: 1.1rem;
+  }
+  .player-panel p {
+    font-size: 1.3rem;
+  }
+}
+
+/* Ensure card images are responsive and maintain aspect ratio */
+.card-image {
+    @apply w-full h-auto object-contain aspect-[2/3] rounded-md shadow-sm;
+    /* aspect-[2/3] assumes a standard card aspect ratio, adjust if needed */
+    /* max-height can be added if cards become too large on certain layouts */
+}
+
+/* Accessibility: Ensure sufficient touch target sizes for mobile */
+.btn, .card-image, .settings-select {
+    min-height: 44px; /* WCAG recommendation for touch targets */
+    min-width: 44px;  /* WCAG recommendation for touch targets */
+}
+
+/* For card images, the clickable area should be the card itself */
+.card-slot {
+    @apply cursor-pointer;
+}
+
+/* Improve focus states for custom components not covered by .focus-visible-ring */
+.player-panel:focus-within,
+.card-slot:focus {
+    @apply ring-2 ring-[hsl(var(--ring))] ring-offset-2 ring-offset-[hsl(var(--background))] outline-none;
+}
+
+/* Hide elements meant only for screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+
